@@ -47,10 +47,23 @@ class BakingDish {
 		this.ingredients = new ArrayList<SimpleIngredient>();
 	}
 
+	@Override
+	public String toString() {
+		String ingredientsString = "";
+		for (int i = getTopIngredientIndex(); i >= 0; i--) {
+			ingredientsString += ingredients.get(i) + "\n";
+		}
+		return ingredientsString;
+	}
+
 	public void pourContentsOf(BakingDish dish) {
 		for (SimpleIngredient ingredient : dish.ingredients) {
 			ingredients.add(ingredient);
 		}
+	}
+
+	protected int getTopIngredientIndex() {
+		return ingredients.size() - 1;
 	}
 }
 class MixingBowl extends BakingDish {
@@ -65,15 +78,6 @@ class MixingBowl extends BakingDish {
 
 	public boolean isEmpty() {
 		return getAmountOfIngredients() <= 0;
-	}
-
-	@Override
-	public String toString() {
-		String ingredientsString = "";
-		for (int i = getTopIngredientIndex(); i >= 0; i--) {
-			ingredientsString += ingredients.get(i) + "\n";
-		}
-		return ingredientsString;
 	}
 
 	public void add(SimpleIngredient simpleIngredient) {
@@ -92,10 +96,6 @@ class MixingBowl extends BakingDish {
 
 	public void removeLastIngredient() {
 		ingredients.remove(getTopIngredientIndex());
-	}
-
-	private int getTopIngredientIndex() {
-		return ingredients.size() - 1;
 	}
 
 	private SimpleIngredient getTopIngredient() {
