@@ -259,4 +259,10 @@ public class Chef {
 		}
 		System.out.println("-------------");
 	}
+
+	public void serves(int bakingDishesAmount) {
+		for (int i = 0; i < bakingDishesAmount; i++) {
+			dishes.get(i).serve();
+		}
+	}
 }

@@ -77,6 +77,12 @@ class SimpleIngredient {
 		this.type = type;
 	}
 
+	@Override
+	public String toString() {
+		if (type == IngredientType.DRY || type == IngredientType.ANY) {return ""+value;}
+		else {return ""+(char)value;}
+	}
+
 	public SimpleIngredient(int value) {
 		this(value, IngredientType.ANY);
 	}
@@ -86,8 +92,7 @@ class SimpleIngredient {
 		this.type = ingredient.getType();
 	}
 
-	@Override
-	public String toString() {
+	public String _debugString() {
 		return value + " " + type;
 	}
 

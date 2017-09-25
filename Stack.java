@@ -51,7 +51,7 @@ class BakingDish {
 	public String toString() {
 		String ingredientsString = "";
 		for (int i = getTopIngredientIndex(); i >= 0; i--) {
-			ingredientsString += ingredients.get(i) + "\n";
+			ingredientsString += ingredients.get(i)._debugString() + "\n";
 		}
 		return ingredientsString;
 	}
@@ -64,6 +64,12 @@ class BakingDish {
 
 	protected int getTopIngredientIndex() {
 		return ingredients.size() - 1;
+	}
+
+	public void serve() {
+		for (SimpleIngredient ingredient : ingredients) {
+			System.out.print(ingredient);
+		}
 	}
 }
 class MixingBowl extends BakingDish {
