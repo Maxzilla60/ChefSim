@@ -1,5 +1,3 @@
-package com.company;
-
 enum Measure {
 	G(IngredientType.DRY, "g"), KG(IngredientType.DRY, "kg"), PINCH(IngredientType.DRY, "pinch", "pinches"),
 	ML(IngredientType.LIQUID, "ml"), L(IngredientType.LIQUID, "l"), DASH(IngredientType.LIQUID, "dash", "dashes"),
