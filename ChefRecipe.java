@@ -5,7 +5,7 @@ import java.util.List;
 public class ChefRecipe {
     private Chef kitchen;
     private List<Method> methods;
-    private boolean zeroBased;
+    private boolean zeroBased; // TODO
 
     public ChefRecipe(String title) {
         this(title, false);
@@ -26,6 +26,46 @@ public class ChefRecipe {
     }
 
     public void putIngredientIntoMixingBowl(String ingredientName) {
-        methods.add(new putIngredientIntoMixingBowlMethod(kitchen, ingredientName, 0));
+        putIngredientIntoMixingBowl(ingredientName, 0);
     }
+	
+	public void foldIngredientIntoMixingBowl(String ingredientName, int mixingBowlIndex) {
+		methods.add(new foldIngredientIntoMixingBowlMethod(kitchen, ingredientName, mixingBowlIndex));
+	}
+	
+	public void foldIngredientIntoMixingBowl(String ingredientName) {
+		foldIngredientIntoMixingBowl(ingredientName, 0);
+	}
+	
+	public void addIngredientToMixingBowl(String ingredientName, int mixingBowlIndex) {
+		methods.add(new addIngredientToMixingBowlMethod(kitchen, ingredientName, mixingBowlIndex));
+	}
+	
+	public void addIngredientToMixingBowl(String ingredientName) {
+		addIngredientToMixingBowl(ingredientName, 0);
+	}
+	
+	public void removeIngredientToMixingBowl(String ingredientName, int mixingBowlIndex) {
+		methods.add(new removeIngredientToMixingBowlMethod(kitchen, ingredientName, mixingBowlIndex));
+	}
+	
+	public void removeIngredientToMixingBowl(String ingredientName) {
+		removeIngredientToMixingBowl(ingredientName, 0);
+	}
+	
+	public void combineIngredientToMixingBowl(String ingredientName, int mixingBowlIndex) {
+		methods.add(new combineIngredientToMixingBowlMethod(kitchen, ingredientName, mixingBowlIndex));
+	}
+	
+	public void combineIngredientToMixingBowl(String ingredientName) {
+		combineIngredientToMixingBowl(ingredientName, 0);
+	}
+	
+	public void devideIngredientToMixingBowl(String ingredientName, int mixingBowlIndex) {
+		methods.add(new devideIngredientToMixingBowlMethod(kitchen, ingredientName, mixingBowlIndex));
+	}
+	
+	public void devideIngredientToMixingBowl(String ingredientName) {
+		devideIngredientToMixingBowl(ingredientName, 0);
+	}
 }

@@ -54,10 +54,6 @@ public class Chef {
 		bowls.get(mixingBowlIndex).add(ingredient);
 	}
 
-	public void putIngredientIntoMixingBowl(String ingredientName) throws IngredientNotFoundException {
-		putIngredientIntoMixingBowl(ingredientName, 0);
-	}
-
 	public void foldIngredientIntoMixingBowl(String ingredientName, int mixingBowlIndex) throws IngredientNotFoundException {
 		checkMixingBowl(mixingBowlIndex);
 		Ingredient ingredient = ingredients.search(ingredientName);
@@ -66,10 +62,6 @@ public class Chef {
 		int topValue = bowls.get(mixingBowlIndex).getTopIngredientValue();
 		ingredient.setValue(topValue);
 		bowls.get(mixingBowlIndex).removeLastIngredient();
-	}
-
-	public void foldIngredientIntoMixingBowl(String ingredientName) throws  IngredientNotFoundException {
-		foldIngredientIntoMixingBowl(ingredientName, 0);
 	}
 
 	public void addIngredientToMixingBowl(String ingredientName, int mixingBowlIndex) throws IngredientNotFoundException {
@@ -81,10 +73,6 @@ public class Chef {
 		bowls.get(mixingBowlIndex).add(sum);
 	}
 
-	public void addIngredientToMixingBowl(String ingredientName) throws IngredientNotFoundException {
-		addIngredientToMixingBowl(ingredientName, 0);
-	}
-
 	public void removeIngredientToMixingBowl(String ingredientName, int mixingBowlIndex) throws IngredientNotFoundException {
 		checkMixingBowl(mixingBowlIndex);
 		Ingredient ingredient = ingredients.search(ingredientName);
@@ -92,10 +80,6 @@ public class Chef {
 		int topValue = bowls.get(mixingBowlIndex).getTopIngredientValue();
 		int difference = topValue - ingredient.getValue();
 		bowls.get(mixingBowlIndex).add(difference);
-	}
-
-	public void removeIngredientToMixingBowl(String ingredientName) throws IngredientNotFoundException {
-		removeIngredientToMixingBowl(ingredientName, 0);
 	}
 
 	public void combineIngredientToMixingBowl(String ingredientName, int mixingBowlIndex) throws IngredientNotFoundException {
@@ -107,10 +91,6 @@ public class Chef {
 		bowls.get(mixingBowlIndex).add(product);
 	}
 
-	public void combineIngredientToMixingBowl(String ingredientName) throws IngredientNotFoundException {
-		combineIngredientToMixingBowl(ingredientName, 0);
-	}
-
 	public void devideIngredientToMixingBowl(String ingredientName, int mixingBowlIndex) throws IngredientNotFoundException {
 		checkMixingBowl(mixingBowlIndex);
 		Ingredient ingredient = ingredients.search(ingredientName);
@@ -118,10 +98,6 @@ public class Chef {
 		int topValue = bowls.get(mixingBowlIndex).getTopIngredientValue();
 		int quotient = ingredient.getValue() / topValue;
 		bowls.get(mixingBowlIndex).add(quotient);
-	}
-
-	public void devideIngredientToMixingBowl(String ingredientName) throws IngredientNotFoundException {
-		devideIngredientToMixingBowl(ingredientName, 0);
 	}
 
 	public void addDryIngredientsToMixingBowl(int mixingBowlIndex) {
