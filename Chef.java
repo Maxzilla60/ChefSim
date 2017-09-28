@@ -39,6 +39,10 @@ public class Chef {
 		return "Ingredients.\n" + ingredients;
 	}
 
+	public void decrementIngredient(String ingredientName) throws IngredientNotFoundException {
+		ingredients.search(ingredientName).decrement();
+	}
+
 	// Methods:
 	// ---
 
@@ -146,6 +150,7 @@ public class Chef {
 		bowls.get(mixingBowlIndex).clean();
 	}
 
+	// TODO: use (int... stacks)?
 	public void pourContentsOfMixingBowlIntoBakingDish(int mixingBowlIndex, int bakingDishIndex) {
 		checkMixingBowl(mixingBowlIndex);
 		checkBakingDish(bakingDishIndex);

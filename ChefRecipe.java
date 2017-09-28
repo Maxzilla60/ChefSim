@@ -41,13 +41,16 @@ public class ChefRecipe {
         return methodsString;
     }
 
-    public void cook() throws IngredientNotFoundException, EndOfLoopNotFoundException {
+    public void cook() throws IngredientNotFoundException, EndOfLoopNotFoundException, StartOfLoopNotFoundException {
         for (int i = 0; i < methods.size(); i++) {
             try {
                 methods.get(i).exec();
             }
+            catch (endLoopException e) {
+                i = endLoopForVerb(e.verb, i);
+            }
             catch (reloopException e) {
-                i = reloopForVerb(methods.get(i).getVerb(), i);
+                i = reloopForVerb(e.verb, i);
             }
         }
     }
@@ -155,6 +158,10 @@ public class ChefRecipe {
         methods.add(new pourContentsOfMixingBowlIntoBakingDishMethod(kitchen, mixingBowlIndex, bakingDishIndex));
     }
 
+    public void serves(int bakingDishesAmount) {
+        methods.add(new servesMethod(kitchen, bakingDishesAmount));
+    }
+
     // Looping:
     // ------
 
@@ -167,10 +174,18 @@ public class ChefRecipe {
         methods.add(new loopEndMethod(kitchen, verb, ingredientName));
     }
 
-    public int reloopForVerb(String verb, int currentIndex) throws EndOfLoopNotFoundException {
-        for (int i = currentIndex; i > 0; i--) {
-            if (methods.get(i) instanceof loopStartMethod &&
-                    methods.get(i).getVerb().equals(verb)) {
+    public int reloopForVerb(String verb, int currentIndex) throws StartOfLoopNotFoundException {
+        for (int i = currentIndex; i >= 0; i--) {
+            if (methods.get(i) instanceof loopStartMethod && methods.get(i).getVerb().equals(verb)) {
+                return i - 1;
+            }
+        }
+        throw new StartOfLoopNotFoundException();
+    }
+
+    public int endLoopForVerb(String verb, int currentIndex) throws EndOfLoopNotFoundException {
+        for (int i = currentIndex; i < methods.size(); i++) {
+            if (methods.get(i) instanceof loopEndMethod && methods.get(i).getVerb().equals(verb)) {
                 return i;
             }
         }

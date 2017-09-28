@@ -41,6 +41,10 @@ class Ingredient {
 		int randomIndex = new Random().nextInt(liquidMeasures.length);
 		measure = liquidMeasures[randomIndex];
 	}
+
+	public void decrement() {
+		value--;
+	}
 }
 class DryIngredient extends Ingredient{
 	@Override

@@ -67,8 +67,8 @@ class BakingDish {
 	}
 
 	public void serve() {
-		for (SimpleIngredient ingredient : ingredients) {
-			System.out.print(ingredient);
+		for (int i = ingredients.size() - 1; i >= 0; i--) {
+			System.out.print(ingredients.get(i));
 		}
 	}
 }
