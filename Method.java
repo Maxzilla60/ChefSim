@@ -1,15 +1,20 @@
+// TODO: st, nd, rd, th, ...
 interface MethodExecutable {
     public void exec() throws IngredientNotFoundException, reloopNotification, endLoopNotification;
 }
 public abstract class Method implements MethodExecutable {
     protected Chef kitchen;
-	
-	protected Method(Chef kitchen) {
-		this.kitchen = kitchen;
-	}
+
+    protected Method(Chef kitchen) {
+        this.kitchen = kitchen;
+    }
 
     public String getVerb() {
-	    return null;
+        return null;
+    }
+
+    public String capitalize(String input) {
+        return input.substring(0, 1).toUpperCase() + input.substring(1);
     }
 }
 class takeIngredientFromRefrigeratorMethod extends Method {
@@ -365,6 +370,11 @@ class servesMethod extends Method {
     public void exec() throws IngredientNotFoundException {
         kitchen.serves(bakingDishesAmount);
     }
+
+    @Override
+    public String toString() {
+        return "\nServes " + bakingDishesAmount + ".";
+    }
 }
 
 class verbIngredient extends Method {
@@ -381,6 +391,11 @@ class verbIngredient extends Method {
         if (kitchen.ingredientIsZero(ingredientName)) {
             throw new endLoopNotification(verb);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "" + capitalize(verb) + " the " + ingredientName + ".";
     }
 
     @Override
@@ -401,6 +416,11 @@ class verbIngredientUntilVerbed extends Method {
     public void exec() throws IngredientNotFoundException, reloopNotification {
         kitchen.decrementIngredient(ingredientName);
         throw new reloopNotification(verb);
+    }
+
+    @Override
+    public String toString() {
+        return "" + capitalize(verb) + " the " + ingredientName + " until " + verb + "ed.";
     }
 
     @Override

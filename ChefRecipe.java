@@ -1,9 +1,11 @@
 import java.util.ArrayList;
 import java.util.List;
+// TODO: IngredientName.toLowerCase()
 
 // Chef Recipe Maker
 public class ChefRecipe {
     private Chef kitchen;
+    private String title;
     private List<Method> methods;
     private boolean zeroBased; // TODO
 
@@ -12,7 +14,8 @@ public class ChefRecipe {
     }
 
     public ChefRecipe(String title, boolean zeroBased_flag) {
-        this.kitchen = new Chef(title);
+        this.kitchen = new Chef();
+        this.title = title;
         this.methods = new ArrayList<Method>();
         this.zeroBased = zeroBased_flag;
     }
@@ -22,13 +25,14 @@ public class ChefRecipe {
     }
 
     public void initIngredient(int value, Measure measure, String name) {
-        kitchen.initIngredient(value, measure, name);
+        kitchen.initIngredient(value, measure, name.toLowerCase());
     }
 
     @Override
     public String toString() {
-        String recipeString = "";
+        String recipeString = title + "\n\n";
         recipeString += kitchen.getIngredientsString() + "\n";
+        recipeString += "Method.\n";
         recipeString += getMethodsString();
         return recipeString;
     }
@@ -36,7 +40,7 @@ public class ChefRecipe {
     private String getMethodsString() {
         String methodsString = "";
         for (Method method : methods) {
-            methodsString += method + " ";
+            methodsString += method + "\n";
         }
         return methodsString;
     }
@@ -166,12 +170,12 @@ public class ChefRecipe {
     // ------
 
     public void verbIngredient(String verb, String ingredientName) {
-        methods.add(new verbIngredient(kitchen, verb, ingredientName));
+        methods.add(new verbIngredient(kitchen, verb.toLowerCase(), ingredientName));
     }
 
     // TODO: make ingredientName optional
     public void verbIngredientUntilVerbed(String verb, String ingredientName) {
-        methods.add(new verbIngredientUntilVerbed(kitchen, verb, ingredientName));
+        methods.add(new verbIngredientUntilVerbed(kitchen, verb.toLowerCase(), ingredientName));
     }
 
     public int reloopForVerb(String verb, int currentIndex) throws StartOfLoopNotFoundException {

@@ -4,13 +4,11 @@ import java.util.Scanner;
 
 // Chef "engine"
 public class Chef {
-	private String title;
 	private Stack ingredients;
 	private List<BakingDish> dishes;
 	private List<MixingBowl> bowls;
 
-	public Chef(String title) {
-		this.title = title;
+	public Chef() {
 		this.ingredients = new Stack();
 		this.dishes = new ArrayList<BakingDish>();
 		this.bowls = new ArrayList<MixingBowl>();
