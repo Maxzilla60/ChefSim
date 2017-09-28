@@ -226,4 +226,9 @@ public class Chef {
 			dishes.get(i).serve();
 		}
 	}
+
+	public boolean ingredientIsZero(String ingredientName) throws IngredientNotFoundException {
+		Ingredient ingredient = ingredients.search(ingredientName);
+		return ingredient.getValue() == 0;
+	}
 }

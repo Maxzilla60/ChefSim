@@ -41,11 +41,19 @@ public class ChefRecipe {
         return methodsString;
     }
 
-    public void cook() throws IngredientNotFoundException {
+    public void cook() throws IngredientNotFoundException, EndOfLoopNotFoundException {
         for (int i = 0; i < methods.size(); i++) {
-            methods.get(i).exec();
+            try {
+                methods.get(i).exec();
+            }
+            catch (reloopException e) {
+                i = reloopForVerb(methods.get(i).getVerb(), i);
+            }
         }
     }
+
+    // Methods:
+    // -------
 
     public void takeIngredientFromRefrigerator(String ingredientName) {
         methods.add(new takeIngredientFromRefrigeratorMethod(kitchen, ingredientName));
@@ -58,43 +66,43 @@ public class ChefRecipe {
     public void putIngredientIntoMixingBowl(String ingredientName) {
         putIngredientIntoMixingBowl(ingredientName, 0);
     }
-	
+
 	public void foldIngredientIntoMixingBowl(String ingredientName, int mixingBowlIndex) {
 		methods.add(new foldIngredientIntoMixingBowlMethod(kitchen, ingredientName, mixingBowlIndex));
 	}
-	
+
 	public void foldIngredientIntoMixingBowl(String ingredientName) {
 		foldIngredientIntoMixingBowl(ingredientName, 0);
 	}
-	
+
 	public void addIngredientToMixingBowl(String ingredientName, int mixingBowlIndex) {
 		methods.add(new addIngredientToMixingBowlMethod(kitchen, ingredientName, mixingBowlIndex));
 	}
-	
+
 	public void addIngredientToMixingBowl(String ingredientName) {
 		addIngredientToMixingBowl(ingredientName, 0);
 	}
-	
+
 	public void removeIngredientToMixingBowl(String ingredientName, int mixingBowlIndex) {
 		methods.add(new removeIngredientToMixingBowlMethod(kitchen, ingredientName, mixingBowlIndex));
 	}
-	
+
 	public void removeIngredientToMixingBowl(String ingredientName) {
 		removeIngredientToMixingBowl(ingredientName, 0);
 	}
-	
+
 	public void combineIngredientToMixingBowl(String ingredientName, int mixingBowlIndex) {
 		methods.add(new combineIngredientToMixingBowlMethod(kitchen, ingredientName, mixingBowlIndex));
 	}
-	
+
 	public void combineIngredientToMixingBowl(String ingredientName) {
 		combineIngredientToMixingBowl(ingredientName, 0);
 	}
-	
+
 	public void devideIngredientToMixingBowl(String ingredientName, int mixingBowlIndex) {
 		methods.add(new devideIngredientToMixingBowlMethod(kitchen, ingredientName, mixingBowlIndex));
 	}
-	
+
 	public void devideIngredientToMixingBowl(String ingredientName) {
 		devideIngredientToMixingBowl(ingredientName, 0);
 	}
@@ -147,7 +155,25 @@ public class ChefRecipe {
         methods.add(new pourContentsOfMixingBowlIntoBakingDishMethod(kitchen, mixingBowlIndex, bakingDishIndex));
     }
 
+    // Looping:
+    // ------
+
     public void startLoop(String verb, String ingredientName) {
         methods.add(new loopStartMethod(kitchen, verb, ingredientName));
+    }
+
+    // TODO: make ingredientName optional
+    public void endLoop(String verb, String ingredientName) {
+        methods.add(new loopEndMethod(kitchen, verb, ingredientName));
+    }
+
+    public int reloopForVerb(String verb, int currentIndex) throws EndOfLoopNotFoundException {
+        for (int i = currentIndex; i > 0; i--) {
+            if (methods.get(i) instanceof loopStartMethod &&
+                    methods.get(i).getVerb().equals(verb)) {
+                return i;
+            }
+        }
+        throw new EndOfLoopNotFoundException();
     }
 }
