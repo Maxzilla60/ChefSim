@@ -17,6 +17,36 @@ public class ChefRecipe {
         this.zeroBased = zeroBased_flag;
     }
 
+    public void initIngredient(Ingredient ingredient) {
+        kitchen.initIngredient(ingredient);
+    }
+
+    public void initIngredient(int value, Measure measure, String name) {
+        kitchen.initIngredient(value, measure, name);
+    }
+
+    @Override
+    public String toString() {
+        String recipeString = "";
+        recipeString += kitchen.getIngredientsString() + "\n";
+        recipeString += getMethodsString();
+        return recipeString;
+    }
+
+    private String getMethodsString() {
+        String methodsString = "";
+        for (Method method : methods) {
+            methodsString += method + " ";
+        }
+        return methodsString;
+    }
+
+    public void cook() throws IngredientNotFoundException {
+        for (int i = 0; i < methods.size(); i++) {
+            methods.get(i).exec();
+        }
+    }
+
     public void takeIngredientFromRefrigerator(String ingredientName) {
         methods.add(new takeIngredientFromRefrigeratorMethod(kitchen, ingredientName));
     }
@@ -93,6 +123,10 @@ public class ChefRecipe {
         stirTheMixingBowlForMinutes(0, minutes);
     }
 
+    public void stirIngredientIntoMixingBowl(String ingredientName, int mixingBowlIndex) {
+        methods.add(new stirIngredientIntoMixingBowlMethod(kitchen, ingredientName, mixingBowlIndex));
+    }
+
     public void mixMixingBowlWell(int mixingBowlIndex) {
         methods.add(new mixMixingBowlWellMethod(kitchen, mixingBowlIndex));
     }
@@ -111,5 +145,9 @@ public class ChefRecipe {
 
     public void pourContentsOfMixingBowlIntoBakingDish(int mixingBowlIndex, int bakingDishIndex) {
         methods.add(new pourContentsOfMixingBowlIntoBakingDishMethod(kitchen, mixingBowlIndex, bakingDishIndex));
+    }
+
+    public void startLoop(String verb, String ingredientName) {
+        methods.add(new loopStartMethod(kitchen, verb, ingredientName));
     }
 }

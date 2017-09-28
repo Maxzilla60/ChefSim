@@ -35,6 +35,10 @@ public class Chef {
 		}*/
 	}
 
+	public String getIngredientsString() {
+		return "Ingredients.\n" + ingredients;
+	}
+
 	// Methods:
 	// ---
 
@@ -125,6 +129,11 @@ public class Chef {
 		bowls.get(mixingBowlIndex).stir(minutes);
 	}
 
+	public void stirIngredientIntoMixingBowl(String ingredientName, int mixingBowlIndex) throws IngredientNotFoundException {
+		Ingredient ingredient = ingredients.search(ingredientName);
+		stirTheMixingBowlForMinutes(mixingBowlIndex, ingredient.getValue());
+	}
+
 	public void mixMixingBowlWell(int mixingBowlIndex) {
 		checkMixingBowl(mixingBowlIndex);
 
@@ -179,10 +188,6 @@ public class Chef {
 
 	private boolean bakingDishExists(int bakingDishIndex) {
 		return bakingDishIndex < dishes.size();
-	}
-
-	private String getIngredientsString() {
-		return "Ingredients.\n" + ingredients;
 	}
 
 	private int getDryIngredientsTotalValue() {

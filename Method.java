@@ -20,6 +20,11 @@ class takeIngredientFromRefrigeratorMethod extends Method {
     public void exec() throws IngredientNotFoundException {
         kitchen.takeIngredientFromRefrigerator(ingredientName);
     }
+
+    @Override
+    public String toString() {
+        return "Take " + ingredientName + " from refrigerator.";
+    }
 }
 class putIngredientIntoMixingBowlMethod extends Method {
     private final String ingredientName;
@@ -33,6 +38,16 @@ class putIngredientIntoMixingBowlMethod extends Method {
 
     public void exec() throws IngredientNotFoundException {
         kitchen.putIngredientIntoMixingBowl(ingredientName, mixingBowlIndex);
+    }
+
+    @Override
+    public String toString() {
+        String output = "Put " + ingredientName + " into ";
+        if (mixingBowlIndex != 0) {
+            output += mixingBowlIndex + "th ";
+        }
+        output += "mixing bowl.";
+        return  output;
     }
 }
 class foldIngredientIntoMixingBowlMethod extends Method {
@@ -48,6 +63,16 @@ class foldIngredientIntoMixingBowlMethod extends Method {
 	public void exec() throws IngredientNotFoundException {
 		kitchen.foldIngredientIntoMixingBowl(ingredientName, mixingBowlIndex);
 	}
+
+    @Override
+    public String toString() {
+        String output = "Fold " + ingredientName + " into ";
+        if (mixingBowlIndex != 0) {
+            output += mixingBowlIndex + "th ";
+        }
+        output += "mixing bowl.";
+        return  output;
+    }
 }
 class addIngredientToMixingBowlMethod extends Method {
 	private final String ingredientName;
@@ -62,6 +87,16 @@ class addIngredientToMixingBowlMethod extends Method {
 	public void exec() throws IngredientNotFoundException {
 		kitchen.addIngredientToMixingBowl(ingredientName, mixingBowlIndex);
 	}
+
+    @Override
+    public String toString() {
+        String output = "Add " + ingredientName;
+        if (mixingBowlIndex != 0) {
+            output += " to " + mixingBowlIndex + "th mixing bowl";
+        }
+        output += ".";
+        return  output;
+    }
 }
 class removeIngredientToMixingBowlMethod extends Method {
 	private final String ingredientName;
@@ -76,6 +111,16 @@ class removeIngredientToMixingBowlMethod extends Method {
 	public void exec() throws IngredientNotFoundException {
 		kitchen.removeIngredientToMixingBowl(ingredientName, mixingBowlIndex);
 	}
+
+    @Override
+    public String toString() {
+        String output = "Remove " + ingredientName;
+        if (mixingBowlIndex != 0) {
+            output += " from " + mixingBowlIndex + "th mixing bowl";
+        }
+        output += ".";
+        return  output;
+    }
 }
 class combineIngredientToMixingBowlMethod extends Method {
 	private final String ingredientName;
@@ -90,6 +135,16 @@ class combineIngredientToMixingBowlMethod extends Method {
 	public void exec() throws IngredientNotFoundException {
 		kitchen.combineIngredientToMixingBowl(ingredientName, mixingBowlIndex);
 	}
+
+    @Override
+    public String toString() {
+        String output = "Combine " + ingredientName;
+        if (mixingBowlIndex != 0) {
+            output += " into " + mixingBowlIndex + "th mixing bowl";
+        }
+        output += ".";
+        return  output;
+    }
 }
 class devideIngredientToMixingBowlMethod extends Method {
 	private final String ingredientName;
@@ -104,6 +159,16 @@ class devideIngredientToMixingBowlMethod extends Method {
 	public void exec() throws IngredientNotFoundException {
 		kitchen.devideIngredientToMixingBowl(ingredientName, mixingBowlIndex);
 	}
+
+    @Override
+    public String toString() {
+        String output = "Devide " + ingredientName;
+        if (mixingBowlIndex != 0) {
+            output += " into " + mixingBowlIndex + "th mixing bowl";
+        }
+        output += ".";
+        return  output;
+    }
 }
 class addDryIngredientsToMixingBowlMethod extends Method {
     private final int mixingBowlIndex;
@@ -115,6 +180,16 @@ class addDryIngredientsToMixingBowlMethod extends Method {
 
     public void exec() throws IngredientNotFoundException {
         kitchen.addDryIngredientsToMixingBowl(mixingBowlIndex);
+    }
+
+    @Override
+    public String toString() {
+        String output = "Add dry ingredients";
+        if (mixingBowlIndex != 0) {
+            output += " to " + mixingBowlIndex + "th mixing bowl";
+        }
+        output += ".";
+        return  output;
     }
 }
 class liquefyIngredientMethod extends Method {
@@ -128,6 +203,11 @@ class liquefyIngredientMethod extends Method {
     public void exec() throws IngredientNotFoundException {
         kitchen.liquefyIngredient(ingredientName);
     }
+
+    @Override
+    public String toString() {
+        return "Liquefy " + ingredientName + ".";
+    }
 }
 class liquefyContentsOfTheMixingBowlMethod extends Method {
     private final int mixingBowlIndex;
@@ -139,6 +219,16 @@ class liquefyContentsOfTheMixingBowlMethod extends Method {
 
     public void exec() throws IngredientNotFoundException {
         kitchen.liquefyContentsOfTheMixingBowl(mixingBowlIndex);
+    }
+
+    @Override
+    public String toString() {
+        String output = "Liquefy contents of the ";
+        if (mixingBowlIndex != 0) {
+            output += "" + mixingBowlIndex + "th ";
+        }
+        output += "mixing bowl.";
+        return  output;
     }
 }
 class stirTheMixingBowlForMinutesMethod extends Method {
@@ -154,6 +244,40 @@ class stirTheMixingBowlForMinutesMethod extends Method {
     public void exec() throws IngredientNotFoundException {
         kitchen.stirTheMixingBowlForMinutes(mixingBowlIndex, minutes);
     }
+
+    @Override
+    public String toString() {
+        String output = "Stir ";
+        if (mixingBowlIndex != 0) {
+            output += "the " + mixingBowlIndex + "th mixing bowl ";
+        }
+        output += "for " + minutes + " minutes.";
+        return  output;
+    }
+}
+class stirIngredientIntoMixingBowlMethod extends Method {
+    private final String ingredientName;
+    private final int mixingBowlIndex;
+
+    public stirIngredientIntoMixingBowlMethod(Chef kitchen, String ingredientName, int mixingBowlIndex) {
+        super(kitchen);
+        this.ingredientName = ingredientName;
+        this.mixingBowlIndex = mixingBowlIndex;
+    }
+
+    public void exec() throws IngredientNotFoundException {
+        kitchen.stirIngredientIntoMixingBowl(ingredientName, mixingBowlIndex);
+    }
+
+    @Override
+    public String toString() {
+        String output = "Stir " + ingredientName + " into the ";
+        if (mixingBowlIndex != 0) {
+            output += "" + mixingBowlIndex + "th ";
+        }
+        output += "mixing bowl.";
+        return  output;
+    }
 }
 class mixMixingBowlWellMethod extends Method {
     private final int mixingBowlIndex;
@@ -166,6 +290,16 @@ class mixMixingBowlWellMethod extends Method {
     public void exec() throws IngredientNotFoundException {
         kitchen.mixMixingBowlWell(mixingBowlIndex);
     }
+
+    @Override
+    public String toString() {
+        String output = "Mix ";
+        if (mixingBowlIndex != 0) {
+            output += "the " + mixingBowlIndex + "th mixing bowl ";
+        }
+        output += "well.";
+        return  output;
+    }
 }
 class cleanMixingBowlMethod extends Method {
     private final int mixingBowlIndex;
@@ -177,6 +311,16 @@ class cleanMixingBowlMethod extends Method {
 
     public void exec() throws IngredientNotFoundException {
         kitchen.cleanMixingBowl(mixingBowlIndex);
+    }
+
+    @Override
+    public String toString() {
+        String output = "Clean ";
+        if (mixingBowlIndex != 0) {
+            output += "" + mixingBowlIndex + "th ";
+        }
+        output += "mixing bowl.";
+        return  output;
     }
 }
 class pourContentsOfMixingBowlIntoBakingDishMethod extends Method {
@@ -191,5 +335,33 @@ class pourContentsOfMixingBowlIntoBakingDishMethod extends Method {
 
     public void exec() throws IngredientNotFoundException {
         kitchen.pourContentsOfMixingBowlIntoBakingDish(mixingBowlIndex, bakingDishIndex);
+    }
+
+    @Override
+    public String toString() {
+        String output = "Pour contents of the ";
+        if (mixingBowlIndex != 0) {
+            output += "" + mixingBowlIndex + "th ";
+        }
+        output += "mixing bowl into the ";
+        if (bakingDishIndex != 0) {
+            output += "" + bakingDishIndex + "th ";
+        }
+        output += "baking dish.";
+        return  output;
+    }
+}
+class loopStartMethod extends Method {
+    private final String verb;
+    private final String ingredientName;
+
+    public loopStartMethod(Chef kitchen, String verb, String ingredientName) {
+        super(kitchen);
+        this.verb = verb;
+        this.ingredientName = ingredientName;
+    }
+
+    public void exec() throws IngredientNotFoundException {
+        return;
     }
 }
