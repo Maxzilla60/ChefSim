@@ -46,10 +46,10 @@ public class ChefRecipe {
             try {
                 methods.get(i).exec();
             }
-            catch (endLoopException e) {
+            catch (endLoopNotification e) {
                 i = endLoopForVerb(e.verb, i);
             }
-            catch (reloopException e) {
+            catch (reloopNotification e) {
                 i = reloopForVerb(e.verb, i);
             }
         }
@@ -165,18 +165,18 @@ public class ChefRecipe {
     // Looping:
     // ------
 
-    public void startLoop(String verb, String ingredientName) {
-        methods.add(new loopStartMethod(kitchen, verb, ingredientName));
+    public void verbIngredient(String verb, String ingredientName) {
+        methods.add(new verbIngredient(kitchen, verb, ingredientName));
     }
 
     // TODO: make ingredientName optional
-    public void endLoop(String verb, String ingredientName) {
-        methods.add(new loopEndMethod(kitchen, verb, ingredientName));
+    public void verbIngredientUntilVerbed(String verb, String ingredientName) {
+        methods.add(new verbIngredientUntilVerbed(kitchen, verb, ingredientName));
     }
 
     public int reloopForVerb(String verb, int currentIndex) throws StartOfLoopNotFoundException {
         for (int i = currentIndex; i >= 0; i--) {
-            if (methods.get(i) instanceof loopStartMethod && methods.get(i).getVerb().equals(verb)) {
+            if (methods.get(i) instanceof verbIngredient && methods.get(i).getVerb().equals(verb)) {
                 return i - 1;
             }
         }
@@ -185,7 +185,7 @@ public class ChefRecipe {
 
     public int endLoopForVerb(String verb, int currentIndex) throws EndOfLoopNotFoundException {
         for (int i = currentIndex; i < methods.size(); i++) {
-            if (methods.get(i) instanceof loopEndMethod && methods.get(i).getVerb().equals(verb)) {
+            if (methods.get(i) instanceof verbIngredientUntilVerbed && methods.get(i).getVerb().equals(verb)) {
                 return i;
             }
         }

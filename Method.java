@@ -1,5 +1,5 @@
 interface MethodExecutable {
-    public void exec() throws IngredientNotFoundException, reloopException, endLoopException;
+    public void exec() throws IngredientNotFoundException, reloopNotification, endLoopNotification;
 }
 public abstract class Method implements MethodExecutable {
     protected Chef kitchen;
@@ -367,19 +367,19 @@ class servesMethod extends Method {
     }
 }
 
-class loopStartMethod extends Method {
+class verbIngredient extends Method {
     private final String verb;
     private final String ingredientName;
 
-    public loopStartMethod(Chef kitchen, String verb, String ingredientName) {
+    public verbIngredient(Chef kitchen, String verb, String ingredientName) {
         super(kitchen);
         this.verb = verb;
         this.ingredientName = ingredientName;
     }
 
-    public void exec() throws IngredientNotFoundException, endLoopException {
+    public void exec() throws IngredientNotFoundException, endLoopNotification {
         if (kitchen.ingredientIsZero(ingredientName)) {
-            throw new endLoopException(verb);
+            throw new endLoopNotification(verb);
         }
     }
 
@@ -388,19 +388,19 @@ class loopStartMethod extends Method {
         return verb;
     }
 }
-class loopEndMethod extends Method {
+class verbIngredientUntilVerbed extends Method {
     private final String verb;
     private final String ingredientName;
 
-    public loopEndMethod(Chef kitchen, String verb, String ingredientName) {
+    public verbIngredientUntilVerbed(Chef kitchen, String verb, String ingredientName) {
         super(kitchen);
         this.verb = verb;
         this.ingredientName = ingredientName;
     }
 
-    public void exec() throws IngredientNotFoundException, reloopException {
+    public void exec() throws IngredientNotFoundException, reloopNotification {
         kitchen.decrementIngredient(ingredientName);
-        throw new reloopException(verb);
+        throw new reloopNotification(verb);
     }
 
     @Override
