@@ -68,4 +68,48 @@ public class ChefRecipe {
 	public void devideIngredientToMixingBowl(String ingredientName) {
 		devideIngredientToMixingBowl(ingredientName, 0);
 	}
+
+    public void addDryIngredientsToMixingBowl(int mixingBowlIndex) {
+        methods.add(new addDryIngredientsToMixingBowlMethod(kitchen, mixingBowlIndex));
+    }
+
+    public void liquefyIngredient(String ingredientName) throws IngredientNotFoundException {
+        methods.add(new liquefyIngredientMethod(kitchen, ingredientName));
+    }
+
+    public void liquefyContentsOfTheMixingBowl(int mixingBowlIndex) {
+        methods.add(new liquefyContentsOfTheMixingBowlMethod(kitchen, mixingBowlIndex));
+    }
+
+    public void liquefyContentsOfTheMixingBowl() {
+        liquefyContentsOfTheMixingBowl(0);
+    }
+
+    public void stirTheMixingBowlForMinutes(int mixingBowlIndex, int minutes) {
+        methods.add(new stirTheMixingBowlForMinutesMethod(kitchen, mixingBowlIndex, minutes));
+    }
+
+    public void stirTheMixingBowlForMinutes(int minutes) {
+        stirTheMixingBowlForMinutes(0, minutes);
+    }
+
+    public void mixMixingBowlWell(int mixingBowlIndex) {
+        methods.add(new mixMixingBowlWellMethod(kitchen, mixingBowlIndex));
+    }
+
+    public void mixMixingBowlWell() {
+        mixMixingBowlWell(0);
+    }
+
+    public void cleanMixingBowl(int mixingBowlIndex) {
+        methods.add(new cleanMixingBowlMethod(kitchen, mixingBowlIndex));
+    }
+
+    public void cleanMixingBowl() {
+        cleanMixingBowl(0);
+    }
+
+    public void pourContentsOfMixingBowlIntoBakingDish(int mixingBowlIndex, int bakingDishIndex) {
+        methods.add(new pourContentsOfMixingBowlIntoBakingDishMethod(kitchen, mixingBowlIndex, bakingDishIndex));
+    }
 }

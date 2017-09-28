@@ -45,7 +45,7 @@ class foldIngredientIntoMixingBowlMethod extends Method {
 		this.mixingBowlIndex = mixingBowlIndex;
 	}
 	
-	public void exec() {
+	public void exec() throws IngredientNotFoundException {
 		kitchen.foldIngredientIntoMixingBowl(ingredientName, mixingBowlIndex);
 	}
 }
@@ -59,7 +59,7 @@ class addIngredientToMixingBowlMethod extends Method {
 		this.mixingBowlIndex = mixingBowlIndex;
 	}
 	
-	public void exec() {
+	public void exec() throws IngredientNotFoundException {
 		kitchen.addIngredientToMixingBowl(ingredientName, mixingBowlIndex);
 	}
 }
@@ -73,7 +73,7 @@ class removeIngredientToMixingBowlMethod extends Method {
 		this.mixingBowlIndex = mixingBowlIndex;
 	}
 	
-	public void exec() {
+	public void exec() throws IngredientNotFoundException {
 		kitchen.removeIngredientToMixingBowl(ingredientName, mixingBowlIndex);
 	}
 }
@@ -87,7 +87,7 @@ class combineIngredientToMixingBowlMethod extends Method {
 		this.mixingBowlIndex = mixingBowlIndex;
 	}
 	
-	public void exec() {
+	public void exec() throws IngredientNotFoundException {
 		kitchen.combineIngredientToMixingBowl(ingredientName, mixingBowlIndex);
 	}
 }
@@ -101,7 +101,95 @@ class devideIngredientToMixingBowlMethod extends Method {
 		this.mixingBowlIndex = mixingBowlIndex;
 	}
 	
-	public void exec() {
+	public void exec() throws IngredientNotFoundException {
 		kitchen.devideIngredientToMixingBowl(ingredientName, mixingBowlIndex);
 	}
+}
+class addDryIngredientsToMixingBowlMethod extends Method {
+    private final int mixingBowlIndex;
+
+    public addDryIngredientsToMixingBowlMethod(Chef kitchen, int mixingBowlIndex) {
+        super(kitchen);
+        this.mixingBowlIndex = mixingBowlIndex;
+    }
+
+    public void exec() throws IngredientNotFoundException {
+        kitchen.addDryIngredientsToMixingBowl(mixingBowlIndex);
+    }
+}
+class liquefyIngredientMethod extends Method {
+    private final String ingredientName;
+
+    public liquefyIngredientMethod(Chef kitchen, String ingredientName) {
+        super(kitchen);
+        this.ingredientName = ingredientName;
+    }
+
+    public void exec() throws IngredientNotFoundException {
+        kitchen.liquefyIngredient(ingredientName);
+    }
+}
+class liquefyContentsOfTheMixingBowlMethod extends Method {
+    private final int mixingBowlIndex;
+
+    public liquefyContentsOfTheMixingBowlMethod(Chef kitchen, int mixingBowlIndex) {
+        super(kitchen);
+        this.mixingBowlIndex = mixingBowlIndex;
+    }
+
+    public void exec() throws IngredientNotFoundException {
+        kitchen.liquefyContentsOfTheMixingBowl(mixingBowlIndex);
+    }
+}
+class stirTheMixingBowlForMinutesMethod extends Method {
+    private final int mixingBowlIndex;
+    private final int minutes;
+
+    public stirTheMixingBowlForMinutesMethod(Chef kitchen, int mixingBowlIndex, int minutes) {
+        super(kitchen);
+        this.mixingBowlIndex = mixingBowlIndex;
+        this.minutes = minutes;
+    }
+
+    public void exec() throws IngredientNotFoundException {
+        kitchen.stirTheMixingBowlForMinutes(mixingBowlIndex, minutes);
+    }
+}
+class mixMixingBowlWellMethod extends Method {
+    private final int mixingBowlIndex;
+
+    public mixMixingBowlWellMethod(Chef kitchen, int mixingBowlIndex) {
+        super(kitchen);
+        this.mixingBowlIndex = mixingBowlIndex;
+    }
+
+    public void exec() throws IngredientNotFoundException {
+        kitchen.mixMixingBowlWell(mixingBowlIndex);
+    }
+}
+class cleanMixingBowlMethod extends Method {
+    private final int mixingBowlIndex;
+
+    public cleanMixingBowlMethod(Chef kitchen, int mixingBowlIndex) {
+        super(kitchen);
+        this.mixingBowlIndex = mixingBowlIndex;
+    }
+
+    public void exec() throws IngredientNotFoundException {
+        kitchen.cleanMixingBowl(mixingBowlIndex);
+    }
+}
+class pourContentsOfMixingBowlIntoBakingDishMethod extends Method {
+    private final int mixingBowlIndex;
+    private final int bakingDishIndex;
+
+    public pourContentsOfMixingBowlIntoBakingDishMethod(Chef kitchen, int mixingBowlIndex, int bakingDishIndex) {
+        super(kitchen);
+        this.mixingBowlIndex = mixingBowlIndex;
+        this.bakingDishIndex = bakingDishIndex;
+    }
+
+    public void exec() throws IngredientNotFoundException {
+        kitchen.pourContentsOfMixingBowlIntoBakingDish(mixingBowlIndex, bakingDishIndex);
+    }
 }

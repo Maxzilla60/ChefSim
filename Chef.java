@@ -108,10 +108,6 @@ public class Chef {
 		bowls.get(mixingBowlIndex).add(new SimpleIngredient(totalDryValue, IngredientType.DRY));
 	}
 
-	public void addDryIngredientsToMixingBowl() {
-		addDryIngredientsToMixingBowl(0);
-	}
-
 	public void liquefyIngredient(String ingredientName) throws IngredientNotFoundException {
 		Ingredient ingredient = ingredients.search(ingredientName);
 		ingredient.liquefy();
@@ -123,18 +119,10 @@ public class Chef {
 		bowls.get(mixingBowlIndex).liquefyAllIngredients();
 	}
 
-	public void liquefyContentsOfTheMixingBowl() {
-		liquefyContentsOfTheMixingBowl(0);
-	}
-
 	public void stirTheMixingBowlForMinutes(int mixingBowlIndex, int minutes) {
 		checkMixingBowl(mixingBowlIndex);
-
+		// TODO: Check minutes > 0?
 		bowls.get(mixingBowlIndex).stir(minutes);
-	}
-
-	public void stirTheMixingBowlForMinutes(int minutes) {
-		stirTheMixingBowlForMinutes(0, minutes);
 	}
 
 	public void mixMixingBowlWell(int mixingBowlIndex) {
@@ -143,18 +131,10 @@ public class Chef {
 		bowls.get(mixingBowlIndex).mixWell();
 	}
 
-	public void mixMixingBowlWell() {
-		mixMixingBowlWell(0);
-	}
-
 	public void cleanMixingBowl(int mixingBowlIndex) {
 		checkMixingBowl(mixingBowlIndex);
 
 		bowls.get(mixingBowlIndex).clean();
-	}
-
-	public void cleanMixingBowl() {
-		cleanMixingBowl(0);
 	}
 
 	public void pourContentsOfMixingBowlIntoBakingDish(int mixingBowlIndex, int bakingDishIndex) {
