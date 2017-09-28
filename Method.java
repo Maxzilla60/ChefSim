@@ -17,6 +17,8 @@ public abstract class Method implements MethodExecutable {
         return input.substring(0, 1).toUpperCase() + input.substring(1);
     }
 }
+
+
 class takeIngredientFromRefrigeratorMethod extends Method {
     private final String ingredientName;
 

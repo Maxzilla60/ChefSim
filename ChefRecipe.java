@@ -24,6 +24,7 @@ public class ChefRecipe {
         kitchen.initIngredient(ingredient);
     }
 
+    // TODO: make measure optional (use Measure.ANY)
     public void initIngredient(int value, Measure measure, String name) {
         kitchen.initIngredient(value, measure, name.toLowerCase());
     }
@@ -35,14 +36,6 @@ public class ChefRecipe {
         recipeString += "Method.\n";
         recipeString += getMethodsString();
         return recipeString;
-    }
-
-    private String getMethodsString() {
-        String methodsString = "";
-        for (Method method : methods) {
-            methodsString += method + "\n";
-        }
-        return methodsString;
     }
 
     public void cook() throws IngredientNotFoundException, EndOfLoopNotFoundException, StartOfLoopNotFoundException {
@@ -57,6 +50,14 @@ public class ChefRecipe {
                 i = reloopForVerb(e.verb, i);
             }
         }
+    }
+
+    private String getMethodsString() {
+        String methodsString = "";
+        for (Method method : methods) {
+            methodsString += method + "\n";
+        }
+        return methodsString;
     }
 
     // Methods:
@@ -178,7 +179,7 @@ public class ChefRecipe {
         methods.add(new verbIngredientUntilVerbed(kitchen, verb.toLowerCase(), ingredientName));
     }
 
-    public int reloopForVerb(String verb, int currentIndex) throws StartOfLoopNotFoundException {
+    private  int reloopForVerb(String verb, int currentIndex) throws StartOfLoopNotFoundException {
         for (int i = currentIndex; i >= 0; i--) {
             if (methods.get(i) instanceof verbIngredient && methods.get(i).getVerb().equals(verb)) {
                 return i - 1;
@@ -187,7 +188,7 @@ public class ChefRecipe {
         throw new StartOfLoopNotFoundException();
     }
 
-    public int endLoopForVerb(String verb, int currentIndex) throws EndOfLoopNotFoundException {
+    private int endLoopForVerb(String verb, int currentIndex) throws EndOfLoopNotFoundException {
         for (int i = currentIndex; i < methods.size(); i++) {
             if (methods.get(i) instanceof verbIngredientUntilVerbed && methods.get(i).getVerb().equals(verb)) {
                 return i;

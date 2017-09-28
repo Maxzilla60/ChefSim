@@ -16,12 +16,12 @@ class Ingredient {
 		return "" + value + " " + measure + " " + name;
 	}
 
-	public String getName() {
-		return name;
+	public boolean isDry() {
+		return true;
 	}
 
-	public void setValue(int value) {
-		this.value = value;
+	public String getName() {
+		return name;
 	}
 
 	public int getValue() {
@@ -30,10 +30,6 @@ class Ingredient {
 
 	public IngredientType getType() {
 		return measure.getType();
-	}
-
-	public boolean isDry() {
-		return true;
 	}
 
 	public void liquefy() {
@@ -45,15 +41,19 @@ class Ingredient {
 	public void decrement() {
 		value--;
 	}
+
+	public void setValue(int value) {
+		this.value = value;
+	}
 }
 class DryIngredient extends Ingredient{
+	public DryIngredient(int value, Measure measure, String name) {
+		super(value, measure, name);
+	}
+
 	@Override
 	public boolean isDry() {
 		return true;
-	}
-
-	public DryIngredient(int value, Measure measure, String name) {
-		super(value, measure, name);
 	}
 }
 class LiquidIngredient extends  Ingredient {
@@ -81,12 +81,6 @@ class SimpleIngredient {
 		this.type = type;
 	}
 
-	@Override
-	public String toString() {
-		if (type == IngredientType.DRY || type == IngredientType.ANY) {return ""+value;}
-		else {return ""+(char)value;}
-	}
-
 	public SimpleIngredient(int value) {
 		this(value, IngredientType.ANY);
 	}
@@ -96,12 +90,10 @@ class SimpleIngredient {
 		this.type = ingredient.getType();
 	}
 
-	public String _debugString() {
-		return value + " " + type;
-	}
-
-	public void liquefy() {
-		type = IngredientType.LIQUID;
+	@Override
+	public String toString() {
+		if (type == IngredientType.DRY || type == IngredientType.ANY) {return ""+value;}
+		else {return ""+(char)value;}
 	}
 
 	public int getValue() {
@@ -114,5 +106,13 @@ class SimpleIngredient {
 
 	public void setValue(int value) {
 		this.value = value;
+	}
+
+	public String _debugString() {
+		return value + " " + type;
+	}
+
+	public void liquefy() {
+		type = IngredientType.LIQUID;
 	}
 }

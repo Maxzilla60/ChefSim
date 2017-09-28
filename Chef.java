@@ -41,6 +41,11 @@ public class Chef {
 		ingredients.search(ingredientName).decrement();
 	}
 
+	public boolean ingredientIsZero(String ingredientName) throws IngredientNotFoundException {
+		Ingredient ingredient = ingredients.search(ingredientName);
+		return ingredient.getValue() == 0;
+	}
+
 	// Methods:
 	// ---
 
@@ -48,10 +53,11 @@ public class Chef {
 		Ingredient ingredient = ingredients.search(ingredientName);
 
 		System.out.print(">");
-		Scanner scanner = new Scanner(System.in);
+		Scanner scanner = new Scanner(System.in); // Open refrigerator
 		int value = scanner.nextInt();
+		scanner.close(); // Close refrigerator
 
-		ingredient.setValue(value);
+		ingredient.setValue(value); // TODO: ingredients.fridge(ingredientName, value)
 	}
 
 	public void putIngredientIntoMixingBowl(String ingredientName, int mixingBowlIndex) throws IngredientNotFoundException {
@@ -148,12 +154,17 @@ public class Chef {
 		bowls.get(mixingBowlIndex).clean();
 	}
 
-	// TODO: use (int... stacks)?
 	public void pourContentsOfMixingBowlIntoBakingDish(int mixingBowlIndex, int bakingDishIndex) {
 		checkMixingBowl(mixingBowlIndex);
 		checkBakingDish(bakingDishIndex);
 
 		dishes.get(bakingDishIndex).pourContentsOf(bowls.get(mixingBowlIndex));
+	}
+
+	public void serves(int bakingDishesAmount) {
+		for (int i = 0; i < bakingDishesAmount; i++) {
+			dishes.get(i).serve();
+		}
 	}
 
 	// Private
@@ -222,16 +233,5 @@ public class Chef {
 			System.out.println(dishes.get(i));
 		}
 		System.out.println("-------------");
-	}
-
-	public void serves(int bakingDishesAmount) {
-		for (int i = 0; i < bakingDishesAmount; i++) {
-			dishes.get(i).serve();
-		}
-	}
-
-	public boolean ingredientIsZero(String ingredientName) throws IngredientNotFoundException {
-		Ingredient ingredient = ingredients.search(ingredientName);
-		return ingredient.getValue() == 0;
 	}
 }
